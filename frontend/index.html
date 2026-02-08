@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام توزيع الطلبة الذكي</title>
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <header class="dashboard-header">
+            <h1>نظام توزيع الطلبة الذكي</h1>
+            <p class="subtitle">Smart Student Distribution System</p>
+        </header>
+
+        <main class="dashboard-content">
+            <!-- College Settings Section -->
+            <section class="card" id="college-settings">
+                <h2 class="section-title">إعدادات الكلية</h2>
+
+                <div class="college-settings-top">
+                    <div class="form-group">
+                        <label for="total-seats">عدد المقاعد الكلية</label>
+                        <input type="number" id="total-seats" name="totalSeats" min="0" step="1" placeholder="0"
+                            inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="manual-seats" name="manualSeats">
+                            <label for="manual-seats">عدد يدوي</label>
+                        </div>
+                        <span class="hint">في حال عدم التحديد، سيتم توزيع المقاعد تلقائياً من إجمالي عدد المقاعد</span>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-add" id="add-department-btn">➕ إضافة قسم</button>
+
+                <div class="department-rows" id="department-rows"></div>
+            </section>
+
+            <!-- Acceptance Settings Section (نسب القبول) -->
+            <section class="card" id="acceptance-settings">
+                <h2 class="section-title">نسب القبول</h2>
+
+                <div class="channels-grid">
+                    <div class="form-group channel-item">
+                        <label for="channel-markazi">مركزي</label>
+                        <input type="number" id="channel-markazi" name="channelMarkazi" min="0" max="100"
+                            placeholder="0" value="0">
+                        <span class="percent-suffix">%</span>
+                    </div>
+                    <div class="form-group channel-item">
+                        <label for="channel-mawazi">موازي</label>
+                        <input type="number" id="channel-mawazi" name="channelMawazi" min="0" max="100" placeholder="0"
+                            value="0">
+                        <span class="percent-suffix">%</span>
+                    </div>
+                    <div class="form-group channel-item">
+                        <label for="channel-shuhada">ذوي الشهداء</label>
+                        <input type="number" id="channel-shuhada" name="channelShuhada" min="0" max="100"
+                            placeholder="0" value="0">
+                        <span class="percent-suffix">%</span>
+                    </div>
+                </div>
+                <p class="validation-error" id="acceptance-error" aria-live="polite"></p>
+            </section>
+
+            <!-- Student File Upload Section -->
+            <section class="card" id="file-upload">
+                <h2 class="section-title">رفع ملف الطلاب</h2>
+
+                <div class="form-group">
+                    <label>اختر ملف Excel</label>
+                    <div class="file-upload-area">
+                        <div class="file-input-wrapper">
+                            <i class="fas fa-cloud-upload-alt"
+                                style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                            <p style="margin-bottom: 1rem; color: var(--text-muted);">اسحب الملف هنا أو قم باختياره</p>
+
+                            <select id="file-select" name="fileSelect" class="file-select" style="display: none;">
+                                <option value="">-- اختر الملف --</option>
+                            </select>
+
+                            <button type="button" class="btn btn-primary" id="choose-file-btn">
+                                <i class="fas fa-folder-open"></i> اختيار ملف
+                            </button>
+                            <input type="file" id="file-input" name="studentFile" accept=".xlsx,.xls" hidden>
+                        </div>
+                        <p class="file-info" id="file-info" style="margin-top: 1rem;">لم يتم اختيار ملف</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process and Result Section -->
+            <section class="card" id="process-section">
+                <button type="button" class="btn btn-success btn-lg" id="start-distribution-btn">بدء عملية
+                    التوزيع</button>
+
+                <div id="results-section" class="card" style="display: none; margin-top: 2rem;">
+                    <div class="results-header">
+                        <h3 style="margin: 0; color: var(--text-main);">نتيجة التوزيع</h3>
+                        <button id="export-btn" class="btn btn-success"
+                            style="display: none; background: var(--excel-color);">
+                            <i class="fas fa-file-excel"></i> حفظ ملف الإكسل
+                        </button>
+                    </div>
+                    <div id="results-content"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+    <script src="js/app.js?v=11"></script>
+</body>
+
+</html>

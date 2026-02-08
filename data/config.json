@@ -1,0 +1,31 @@
+{
+    "capacities": {
+        "الامن السيبراني": 50,
+        "تكنولوجيا المعلومات": 50,
+        "علوم الحاسوب": 50
+    },
+    "quotas": {
+        "مركزي": 0.6,
+        "الموازي": 0.3,
+        "ذوي الشهداء": 0.1
+    },
+    "departments": [
+        {
+            "name": "علوم الحاسوب",
+            "capacity": 0,
+            "is_active": true
+        },
+        {
+            "name": "تكنولوجيا المعلومات",
+            "capacity": 0,
+            "is_active": true
+        },
+        {
+            "name": "الامن السيبراني",
+            "capacity": 0,
+            "is_active": true
+        }
+    ],
+    "total_capacity": 0,
+    "manual_mode": false
+}
