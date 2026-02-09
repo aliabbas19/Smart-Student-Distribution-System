@@ -26,6 +26,6 @@
             "is_active": true
         }
     ],
-    "total_capacity": 0,
+    "total_capacity": 300,
     "manual_mode": false
 }
