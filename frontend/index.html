@@ -36,8 +36,13 @@
                         <div class="checkbox-group">
                             <input type="checkbox" id="manual-seats" name="manualSeats">
                             <label for="manual-seats">عدد يدوي</label>
+                            <span class="text-sm text-gray-500"
+                                style="font-size: 0.8em; color: var(--text-muted); margin-right: 0.5rem;"
+                                data-translate="manual_count_help">(في حال عدم التحديد، سيتم توزيع المقاعد
+                                تلقائياً)</span>
                         </div>
-                        <span class="hint">في حال عدم التحديد، سيتم توزيع المقاعد تلقائياً من إجمالي عدد المقاعد</span>
+                        <span class="hint" style="display:none;">في حال عدم التحديد، سيتم توزيع المقاعد تلقائياً من
+                            إجمالي عدد المقاعد</span>
                     </div>
                 </div>
 
@@ -70,6 +75,8 @@
                         <span class="percent-suffix">%</span>
                     </div>
                 </div>
+                <div id="acceptance-validation-msg" class="validation-message"
+                    style="margin-top: 10px; font-weight: bold;"></div>
                 <p class="validation-error" id="acceptance-error" aria-live="polite"></p>
             </section>
 

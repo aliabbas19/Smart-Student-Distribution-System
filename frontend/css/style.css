@@ -103,10 +103,43 @@ body {
 .section-title {
     font-size: 1.25rem;
     font-weight: 700;
+    /* Bold as requested */
     margin-bottom: 1.5rem;
     color: var(--text-main);
     border-bottom: 2px solid #e2e8f0;
     padding-bottom: 0.75rem;
+}
+
+/* Utility Classes */
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-gray-500 {
+    color: #6b7280;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+/* Spinner */
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Forms & Inputs */

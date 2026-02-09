@@ -136,11 +136,34 @@ function addDepartmentRow(name = '', capacity = '') {
 
     const removeBtn = row.querySelector('.btn-remove');
     removeBtn.addEventListener('click', () => {
-        row.remove();
-        saveConfig();
+        if (confirm("هل أنت متأكد من حذف هذا القسم؟")) {
+            row.remove();
+            saveConfig();
+        }
     });
 
     elements.departmentRows.appendChild(row);
+}
+
+function updateValidationUI() {
+    const markazi = parseInt(elements.channelMarkazi.value, 10) || 0;
+    const mawazi = parseInt(elements.channelMawazi.value, 10) || 0;
+    const shuhada = parseInt(elements.channelShuhada.value, 10) || 0;
+    const total = markazi + mawazi + shuhada;
+
+    const msgEl = document.getElementById('acceptance-validation-msg');
+
+    if (total === 100) {
+        msgEl.textContent = `المجموع: ${total}%`;
+        msgEl.style.color = 'var(--success-color)';
+        if (elements.startDistributionBtn.textContent !== 'جاري التوزيع...') {
+            elements.startDistributionBtn.disabled = false;
+        }
+    } else {
+        msgEl.textContent = `المجموع: ${total}% (يجب أن يكون 100%)`;
+        msgEl.style.color = 'var(--danger-color)';
+        elements.startDistributionBtn.disabled = true;
+    }
 }
 
 function updateChannelPercentages() {
@@ -238,7 +261,7 @@ async function startDistribution() {
     }
 
     elements.startDistributionBtn.disabled = true;
-    elements.startDistributionBtn.textContent = 'جاري التوزيع...';
+    elements.startDistributionBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوزيع...';
     elements.resultsSection.style.display = 'none';
 
     const formData = new FormData();
@@ -393,7 +416,7 @@ async function init() {
         if (config.quotas) {
             elements.channelMarkazi.value = (config.quotas['مركزي'] || 0.6) * 100;
             elements.channelMawazi.value = (config.quotas['الموازي'] || 0.3) * 100;
-            elements.channelShuhada.value = (config.quotas['ذوي الشهداء'] || 0.1) * 100;
+            updateValidationUI();
         }
 
         // Apply Departments
@@ -437,8 +460,10 @@ async function init() {
     });
 
     [elements.channelMarkazi, elements.channelMawazi, elements.channelShuhada].forEach(input => {
+        input.addEventListener('input', updateValidationUI);
         input.addEventListener('change', () => {
             updateChannelPercentages();
+            updateValidationUI();
             saveConfig();
         });
     });
